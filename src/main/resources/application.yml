@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:file:/home/paulasantana/Documents/repositorio-local/pedidos
+    username: root
+    password: root
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2
