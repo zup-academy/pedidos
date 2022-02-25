@@ -4,9 +4,9 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   datasource:
-    url: jdbc:h2:file:/home/paulasantana/Documents/repositorio-local/pedidos
+    url: jdbc:h2:~/pedidos
     username: root
     password: root
     driver-class-name: org.h2.Driver
