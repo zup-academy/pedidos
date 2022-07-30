@@ -34,6 +34,8 @@ public class PedidoRequest {
     }
 
     public Pedido getPedido() {
-        return new Pedido(this.idCliente, this.idRestaurante);
+        var items = ItemRequest.getItems(this.getItems());
+
+        return new Pedido(this.idCliente, this.idRestaurante, items);
     }
 }

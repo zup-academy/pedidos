@@ -25,10 +25,11 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Long idCliente, Long idRestaurante) {
+    public Pedido(Long idCliente, Long idRestaurante,List<Item> items) {
         this.idCliente = idCliente;
         this.idRestaurante = idRestaurante;
         this.dataCriado = LocalDateTime.now();
+        this.items = items;
     }
 
     public Long getId() {
@@ -49,5 +50,16 @@ public class Pedido {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", idCliente=" + idCliente +
+                ", idRestaurante=" + idRestaurante +
+                ", dataCriado=" + dataCriado +
+                ", items=" + items +
+                '}';
     }
 }

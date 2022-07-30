@@ -28,11 +28,10 @@ public class Item {
     public Item() {
     }
 
-    public Item(int quantidade, Long sku, BigDecimal valor, Pedido pedido) {
+    public Item(int quantidade, Long sku, BigDecimal valor) {
         this.quantidade = quantidade;
         this.sku = sku;
         this.valor = valor;
-        this.pedido = pedido;
         this.dataCriado= LocalDateTime.now();
     }
 

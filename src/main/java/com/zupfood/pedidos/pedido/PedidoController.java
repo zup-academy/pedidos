@@ -2,6 +2,8 @@ package com.zupfood.pedidos.pedido;
 
 import com.zupfood.pedidos.item.ItemRepository;
 import com.zupfood.pedidos.item.ItemRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +17,13 @@ import javax.transaction.Transactional;
 @RequestMapping("/pedidos")
 public class PedidoController {
 
+    Logger logger = LoggerFactory.getLogger(PedidoController.class);
+
     @Autowired
     private PedidoRepository pedidoRepository;
 
     @Autowired
-    private ItemRepository itemRepository;
+    private PedidoNovoProducer pedidoNovoProducer;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
@@ -27,9 +31,10 @@ public class PedidoController {
         var pedido = request.getPedido();
         pedido = pedidoRepository.save(pedido);
 
-        var items = ItemRequest.getItems(request.getItems(),pedido);
-        items = itemRepository.saveAll(items);
+        logger.info("Pedido de código {} cadastrado com sucesso",pedido.getId());
 
-        return PedidoResponse.of(pedido,items);
+        pedidoNovoProducer.enviar(pedido);
+
+        return PedidoResponse.of(pedido);
     }
 }
