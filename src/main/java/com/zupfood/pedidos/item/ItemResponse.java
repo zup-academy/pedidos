@@ -46,6 +46,6 @@ public class ItemResponse {
 
     public  static ItemResponse of(Item item){
         return new ItemResponse(item.getId(), item.getQuantidade(),
-                item.getSku(), item.getValor(), item.getDataCriado());
+                item.getIdProduto(), item.getValor(), item.getDataCriado());
     }
 }

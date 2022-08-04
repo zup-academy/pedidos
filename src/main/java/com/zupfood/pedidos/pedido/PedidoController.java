@@ -22,9 +22,6 @@ public class PedidoController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    @Autowired
-    private PedidoNovoProducer pedidoNovoProducer;
-
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     public PedidoResponse novoPedido(@RequestBody PedidoRequest request){
@@ -32,8 +29,6 @@ public class PedidoController {
         pedido = pedidoRepository.save(pedido);
 
         logger.info("Pedido de código {} cadastrado com sucesso",pedido.getId());
-
-        pedidoNovoProducer.enviar(pedido);
 
         return PedidoResponse.of(pedido);
     }

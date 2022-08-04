@@ -15,7 +15,7 @@ public class Item {
 
     private int quantidade;
 
-    private Long sku;
+    private Long idProduto;
 
     private BigDecimal valor;
 
@@ -28,9 +28,9 @@ public class Item {
     public Item() {
     }
 
-    public Item(int quantidade, Long sku, BigDecimal valor) {
+    public Item(int quantidade, Long idProduto, BigDecimal valor) {
         this.quantidade = quantidade;
-        this.sku = sku;
+        this.idProduto = idProduto;
         this.valor = valor;
         this.dataCriado= LocalDateTime.now();
     }
@@ -43,8 +43,8 @@ public class Item {
         return quantidade;
     }
 
-    public Long getSku() {
-        return sku;
+    public Long getIdProduto() {
+        return idProduto;
     }
 
     public BigDecimal getValor() {
