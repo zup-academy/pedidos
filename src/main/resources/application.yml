@@ -17,8 +17,8 @@ spring:
   kafka:
     bootstrap-servers: 127.0.0.1:9092
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer : org.apache.kafka.common.serialization.StringSerializer
+      value-serializer : org.springframework.kafka.support.serializer.JsonSerializer
       client-id: pedidos
       topic: PEDIDO_NOVO
 management:
