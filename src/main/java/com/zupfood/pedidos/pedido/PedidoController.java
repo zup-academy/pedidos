@@ -1,5 +1,7 @@
 package com.zupfood.pedidos.pedido;
 
+import com.zupfood.pedidos.cliente.ClienteClient;
+import com.zupfood.pedidos.cliente.ClienteResponse;
 import com.zupfood.pedidos.item.ItemRepository;
 import com.zupfood.pedidos.item.ItemRequest;
 import org.slf4j.Logger;
@@ -22,10 +24,17 @@ public class PedidoController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private ClienteClient clienteClient;
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     public PedidoResponse novoPedido(@RequestBody PedidoRequest request){
+
         var pedido = request.getPedido();
+        ClienteResponse cliente = clienteClient.getCliente(pedido.getIdCliente());
+        if(cliente==null){ throw new IllegalArgumentException("Id do cliente inválido");}
+
         pedido = pedidoRepository.save(pedido);
 
         logger.info("Pedido de código {} cadastrado com sucesso",pedido.getId());
