@@ -1,5 +1,6 @@
 package com.zupfood.pedidos.pedido;
 
+import com.zupfood.pedidos.item.Item;
 import com.zupfood.pedidos.item.ItemRequest;
 
 import javax.validation.constraints.NotEmpty;
@@ -34,8 +35,10 @@ public class PedidoRequest {
     }
 
     public Pedido getPedido() {
-        var items = ItemRequest.getItems(this.getItems());
+        return new Pedido(this.idCliente, this.idRestaurante);
+    }
 
-        return new Pedido(this.idCliente, this.idRestaurante, items);
+    public List<Item> getItens(Pedido pedido){
+        return ItemRequest.getItems(this.getItems(), pedido);
     }
 }

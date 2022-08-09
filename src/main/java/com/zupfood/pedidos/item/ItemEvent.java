@@ -1,16 +1,12 @@
 package com.zupfood.pedidos.item;
 
-import com.zupfood.pedidos.pedido.Pedido;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-public class Item {
+public class ItemEvent {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int quantidade;
@@ -19,21 +15,18 @@ public class Item {
 
     private BigDecimal valor;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataCriado;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pedido")
-    private Pedido pedido;
-
-    public Item() {
+    public ItemEvent() {
     }
 
-    public Item(int quantidade, Long sku, BigDecimal valor, Pedido pedido) {
+    public ItemEvent(Long id, int quantidade, Long sku, BigDecimal valor, LocalDateTime dataCriado) {
+        this.id = id;
         this.quantidade = quantidade;
         this.sku = sku;
         this.valor = valor;
-        this.dataCriado= LocalDateTime.now();
-        this.pedido = pedido;
+        this.dataCriado = dataCriado;
     }
 
     public Long getId() {
@@ -54,9 +47,5 @@ public class Item {
 
     public LocalDateTime getDataCriado() {
         return dataCriado;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
     }
 }

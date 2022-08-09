@@ -26,11 +26,11 @@ public class ItemRequest {
         this.valor = valor;
     }
 
-    public Item getItem(){
-        return new Item(this.quantidade, this.sku, this.valor);
+    public Item getItem(Pedido pedido){
+        return new Item(this.quantidade, this.sku, this.valor, pedido);
     }
 
-    public static List<Item> getItems(List<ItemRequest> items){
-        return items.stream().map(i -> i.getItem()).collect(Collectors.toList());
+    public static List<Item> getItems(List<ItemRequest> itens, Pedido pedido){
+        return itens.stream().map(i -> i.getItem(pedido)).collect(Collectors.toList());
     }
 }

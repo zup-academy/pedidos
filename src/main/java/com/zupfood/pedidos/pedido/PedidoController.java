@@ -23,6 +23,9 @@ public class PedidoController {
     private PedidoRepository pedidoRepository;
 
     @Autowired
+    private ItemRepository itemRepository;
+
+    @Autowired
     private PedidoNovoProducer pedidoNovoProducer;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -31,10 +34,13 @@ public class PedidoController {
         var pedido = request.getPedido();
         pedido = pedidoRepository.save(pedido);
 
+        var itens = request.getItens(pedido);
+        itemRepository.saveAll(itens);
+
         logger.info("Pedido de código {} cadastrado com sucesso",pedido.getId());
 
-        pedidoNovoProducer.enviar(pedido);
+        pedidoNovoProducer.enviar(pedido, itens);
 
-        return PedidoResponse.of(pedido);
+        return PedidoResponse.of(pedido, itens);
     }
 }

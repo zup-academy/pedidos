@@ -1,29 +1,33 @@
 package com.zupfood.pedidos.pedido;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zupfood.pedidos.item.ItemEvent;
 
-@Entity
-@Table(name = "pedido")
-public class Pedido {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class NovoPedidoEvent {
+
     private Long id;
 
     private Long idCliente;
 
     private Long idRestaurante;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataCriado;
 
+    private List<ItemEvent> itens;
 
-    public Pedido() {
-    }
-
-    public Pedido(Long idCliente, Long idRestaurante) {
+    public NovoPedidoEvent(Long id, Long idCliente, Long idRestaurante, LocalDateTime dataCriado, List<ItemEvent> itens) {
+        this.id = id;
         this.idCliente = idCliente;
         this.idRestaurante = idRestaurante;
-        this.dataCriado = LocalDateTime.now();
+        this.dataCriado = dataCriado;
+        this.itens = itens;
+    }
+
+    public NovoPedidoEvent() {
     }
 
     public Long getId() {
@@ -42,9 +46,13 @@ public class Pedido {
         return dataCriado;
     }
 
+    public List<ItemEvent> getItens() {
+        return itens;
+    }
+
     @Override
     public String toString() {
-        return "Pedido{" +
+        return "NovoPedidoEvent{" +
                 "id=" + id +
                 ", idCliente=" + idCliente +
                 ", idRestaurante=" + idRestaurante +

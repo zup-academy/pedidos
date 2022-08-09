@@ -49,8 +49,8 @@ public class PedidoResponse {
         return items;
     }
 
-    public static PedidoResponse of(Pedido pedido){
-        var itemsReponse = pedido.getItems().stream()
+    public static PedidoResponse of(Pedido pedido, List<Item> itens){
+        var itemsReponse = itens.stream()
                 .map(i -> ItemResponse.of(i)).collect(Collectors.toList());
         return new PedidoResponse(pedido.getId(),pedido.getIdCliente(),
                 pedido.getIdRestaurante(), pedido.getDataCriado(), itemsReponse);
