@@ -1,6 +1,9 @@
 package com.zupfood.pedidos.pedido;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.zupfood.pedidos.item.ItemEvent;
 
 import java.time.LocalDateTime;
@@ -15,6 +18,7 @@ public class NovoPedidoEvent {
     private Long idRestaurante;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonSerialize
     private LocalDateTime dataCriado;
 
     private List<ItemEvent> itens;

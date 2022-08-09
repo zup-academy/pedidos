@@ -20,7 +20,9 @@ spring:
       key-serializer : org.apache.kafka.common.serialization.StringSerializer
       value-serializer : org.springframework.kafka.support.serializer.JsonSerializer
       client-id: pedidos
-      topic: PEDIDO_NOVO
+      topic:
+        novo-pedido: PEDIDO_NOVO
+        pedido-cancelado: PEDIDO_CANCELADO
 management:
   health:
     diskSpace:

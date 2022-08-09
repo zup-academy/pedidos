@@ -16,6 +16,9 @@ public class Pedido {
 
     private LocalDateTime dataCriado;
 
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+
 
     public Pedido() {
     }
@@ -23,6 +26,7 @@ public class Pedido {
     public Pedido(Long idCliente, Long idRestaurante) {
         this.idCliente = idCliente;
         this.idRestaurante = idRestaurante;
+        this.status = StatusPedido.SOLICITADO;
         this.dataCriado = LocalDateTime.now();
     }
 
@@ -50,5 +54,9 @@ public class Pedido {
                 ", idRestaurante=" + idRestaurante +
                 ", dataCriado=" + dataCriado +
                 '}';
+    }
+
+    public void cancelar() {
+        this.status = StatusPedido.CANCELADO;
     }
 }

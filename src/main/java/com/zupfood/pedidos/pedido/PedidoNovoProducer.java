@@ -21,7 +21,7 @@ public class PedidoNovoProducer {
     @Autowired
     private KafkaTemplate<String, NovoPedidoEvent> kafkaTemplate;
 
-    @Value("${spring.kafka.producer.topic}" )
+    @Value("${spring.kafka.producer.topic.novo-pedido}" )
     private String topico;
 
     @Async
