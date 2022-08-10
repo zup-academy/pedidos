@@ -46,6 +46,10 @@ public class Pedido {
         return dataCriado;
     }
 
+    public StatusPedido getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" +
