@@ -23,12 +23,15 @@ public class NovoPedidoEvent {
 
     private List<ItemEvent> itens;
 
-    public NovoPedidoEvent(Long id, Long idCliente, Long idRestaurante, LocalDateTime dataCriado, List<ItemEvent> itens) {
+    private StatusPedido status;
+
+    public NovoPedidoEvent(Long id, Long idCliente, Long idRestaurante, LocalDateTime dataCriado, List<ItemEvent> itens, StatusPedido status) {
         this.id = id;
         this.idCliente = idCliente;
         this.idRestaurante = idRestaurante;
         this.dataCriado = dataCriado;
         this.itens = itens;
+        this.status = status;
     }
 
     public NovoPedidoEvent() {
@@ -52,6 +55,10 @@ public class NovoPedidoEvent {
 
     public List<ItemEvent> getItens() {
         return itens;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
     }
 
     @Override

@@ -53,5 +53,4 @@ public class PedidoController {
 
         pedidoCanceladoProducer.enviar(pedido);
     }
-
 }
