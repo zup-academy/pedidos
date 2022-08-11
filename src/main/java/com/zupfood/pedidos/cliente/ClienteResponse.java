@@ -1,11 +1,6 @@
 package com.zupfood.pedidos.cliente;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class ClienteResponse {
 
     private Long id;
@@ -14,14 +9,6 @@ public class ClienteResponse {
 
     private String email;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate nascimento;
-
-    @JsonFormat(pattern = "dd-MM-yyyy HH:MM:ss")
-    private LocalDateTime incluidoEm;
-
-    @JsonFormat(pattern = "dd-MM-yyyy HH:MM:ss")
-    private LocalDateTime atualizadoEm;
 
     public Long getId() {
         return id;
@@ -47,27 +34,5 @@ public class ClienteResponse {
         this.email = email;
     }
 
-    public LocalDate getNascimento() {
-        return nascimento;
-    }
 
-    public void setNascimento(LocalDate nascimento) {
-        this.nascimento = nascimento;
-    }
-
-    public LocalDateTime getIncluidoEm() {
-        return incluidoEm;
-    }
-
-    public void setIncluidoEm(LocalDateTime incluidoEm) {
-        this.incluidoEm = incluidoEm;
-    }
-
-    public LocalDateTime getAtualizadoEm() {
-        return atualizadoEm;
-    }
-
-    public void setAtualizadoEm(LocalDateTime atualizadoEm) {
-        this.atualizadoEm = atualizadoEm;
-    }
 }

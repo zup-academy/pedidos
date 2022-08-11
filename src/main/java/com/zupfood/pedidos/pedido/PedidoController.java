@@ -4,6 +4,8 @@ import com.zupfood.pedidos.cliente.ClienteClient;
 import com.zupfood.pedidos.cliente.ClienteResponse;
 import com.zupfood.pedidos.item.ItemRepository;
 import com.zupfood.pedidos.item.ItemRequest;
+import com.zupfood.pedidos.restaurante.RestauranteClient;
+import com.zupfood.pedidos.restaurante.RestauranteResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +29,20 @@ public class PedidoController {
     @Autowired
     private ClienteClient clienteClient;
 
+    @Autowired
+    private RestauranteClient restauranteClient;
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     public PedidoResponse novoPedido(@RequestBody PedidoRequest request){
 
         var pedido = request.getPedido();
+
         ClienteResponse cliente = clienteClient.getCliente(pedido.getIdCliente());
         if(cliente==null){ throw new IllegalArgumentException("Id do cliente inválido");}
+
+        RestauranteResponse restaurante = restauranteClient.getRestaurante(pedido.getIdRestaurante());
+        if(restaurante==null){ throw new IllegalArgumentException("Id do cliente inválido");}
 
         pedido = pedidoRepository.save(pedido);
 
