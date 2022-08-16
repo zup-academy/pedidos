@@ -36,6 +36,10 @@ public class PedidoRequest {
     public Pedido getPedido() {
         var items = ItemRequest.getItems(this.getItems());
 
-        return new Pedido(this.idCliente, this.idRestaurante, items);
+        Pedido pedido = new Pedido(this.idCliente, this.idRestaurante, items);
+
+        pedido.getItems().forEach(i -> i.setPedido(pedido));
+
+        return pedido;
     }
 }

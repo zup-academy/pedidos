@@ -19,8 +19,11 @@ public class Pedido {
 
     private LocalDateTime dataCriado;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<Item> items;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     public Pedido() {
     }
@@ -30,6 +33,7 @@ public class Pedido {
         this.idRestaurante = idRestaurante;
         this.dataCriado = LocalDateTime.now();
         this.items = items;
+        this.status = Status.PENDENTE;
     }
 
     public Long getId() {
@@ -52,6 +56,10 @@ public class Pedido {
         return items;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" +
@@ -61,5 +69,9 @@ public class Pedido {
                 ", dataCriado=" + dataCriado +
                 ", items=" + items +
                 '}';
+    }
+
+    public void atualizaStatus(Status status) {
+        this.status = status;
     }
 }

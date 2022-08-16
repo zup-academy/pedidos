@@ -19,14 +19,17 @@ public class PedidoResponse {
 
     private List<ItemResponse> items;
 
+    private Status status;
+
     public PedidoResponse(Long id, Long idCliente,
                           Long idRestaurante, LocalDateTime dataCriado,
-                          List<ItemResponse> items) {
+                          List<ItemResponse> items, Status status) {
         this.id = id;
         this.idCliente = idCliente;
         this.idRestaurante = idRestaurante;
         this.dataCriado = dataCriado;
         this.items = items;
+        this.status = status;
     }
 
     public Long getId() {
@@ -49,10 +52,14 @@ public class PedidoResponse {
         return items;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     public static PedidoResponse of(Pedido pedido){
-        var itemsReponse = pedido.getItems().stream()
+        var itensReponse = pedido.getItems().stream()
                 .map(i -> ItemResponse.of(i)).collect(Collectors.toList());
         return new PedidoResponse(pedido.getId(),pedido.getIdCliente(),
-                pedido.getIdRestaurante(), pedido.getDataCriado(), itemsReponse);
+                pedido.getIdRestaurante(), pedido.getDataCriado(), itensReponse, pedido.getStatus());
     }
 }

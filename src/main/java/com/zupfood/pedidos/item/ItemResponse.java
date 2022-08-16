@@ -1,5 +1,7 @@
 package com.zupfood.pedidos.item;
 
+import com.zupfood.pedidos.pedido.Pedido;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
