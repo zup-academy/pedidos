@@ -1,7 +1,6 @@
 package com.zupfood.pedidos.pedido;
 
 import com.zupfood.pedidos.item.Item;
-import com.zupfood.pedidos.item.ItemEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class PedidoNovoProducer {
     Logger logger = LoggerFactory.getLogger(PedidoNovoProducer.class);
 
     @Autowired
-    private KafkaTemplate<String, NovoPedidoEvent> kafkaTemplate;
+    private KafkaTemplate<String, PedidoNovoEvent> kafkaTemplate;
 
     @Value("${spring.kafka.producer.topic.novo-pedido}" )
     private String topico;
@@ -30,9 +29,9 @@ public class PedidoNovoProducer {
                 .map(i -> new ItemEvent(i.getId(), i.getQuantidade(), i.getSku(), i.getValor(), i.getDataCriado()))
                 .collect(Collectors.toList());
 
-        NovoPedidoEvent evento = new NovoPedidoEvent(pedido.getId(),
+        PedidoNovoEvent evento = new PedidoNovoEvent(pedido.getId(),
                 pedido.getIdCliente(), pedido.getIdRestaurante(),
-                pedido.getDataCriado(), itensEvent, pedido.getStatus());
+                pedido.getDataCriado(), itensEvent, StatusEvent.valueOf(pedido.getStatus().toString()));
 
         kafkaTemplate.send(topico, pedido.getId().toString(), evento);
 

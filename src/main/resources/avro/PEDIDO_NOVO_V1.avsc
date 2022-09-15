@@ -1,0 +1,67 @@
+{
+  "namespace": "com.zupfood.pedidos.pedido",
+  "type": "record",
+  "name": "PedidoNovoEvent",
+  "version":"1",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "idCliente",
+      "type": "long"
+    },
+    {
+      "name": "idRestaurante",
+      "type": "long"
+    },
+    {
+      "name": "dataCriado",
+      "type": [ "null", { "type": "long", "logicalType": "local-timestamp-micros" } ]
+    },
+    {
+      "name": "itens",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "ItemEvent",
+          "fields": [
+            {
+              "name": "id",
+              "type": "long"
+            },
+            {
+              "name": "quantidade",
+              "type": "int"
+            },
+            {
+              "name": "sku",
+              "type": "long"
+            },
+            {
+              "name": "valor",
+              "type": [ {
+                "type": "string",
+                "java-class": "java.math.BigDecimal"
+              } ]
+            },
+            {
+              "name": "dataCriado",
+              "type": [ "null", { "type": "long", "logicalType": "local-timestamp-micros"} ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name" : "status",
+      "type" : {
+        "type" : "enum",
+        "name" : "StatusEvent",
+        "symbols": ["SOLICITADO","PROCESSANDO","FEITO", "ENTREGUE", "CANCELADO"]
+      }
+    }
+  ]
+}

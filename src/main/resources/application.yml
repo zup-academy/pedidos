@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 9090
 
 spring:
   jpa:
@@ -15,10 +15,14 @@ spring:
       enabled: true
       path: /h2
   kafka:
+    properties:
+      schema:
+        registry:
+          url: ${SCHEMA_REGISTRY_URL:http://localhost:8081}
     bootstrap-servers: 127.0.0.1:9092
     producer:
       key-serializer : org.apache.kafka.common.serialization.StringSerializer
-      value-serializer : org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer : io.confluent.kafka.serializers.KafkaAvroSerializer
       client-id: pedidos
       topic:
         novo-pedido: PEDIDO_NOVO

@@ -1,0 +1,20 @@
+{
+  "namespace": "com.zupfood.pedidos.pedido",
+  "type": "record",
+  "name": "PedidoCanceladoEvent",
+  "version":"1",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "idCliente",
+      "type": "long"
+    },
+    {
+      "name": "idRestaurante",
+      "type": "long"
+    }
+  ]
+}
